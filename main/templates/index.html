@@ -10,6 +10,10 @@
     <meta content="" name="description">
     <!--  style  -->
     {% include "partials/_style.html" %}
+    <!-- header start -->
+    <link rel="stylesheet" href="{% static 'css/w3.css' %}">
+    <link href="{% static 'css/header.css' %}" rel="stylesheet">
+    <!-- header end -->
 </head>
 
 <body>
@@ -25,25 +29,39 @@
 
         <!-- Navbar & Hero Start -->
         <div class="container-xxl position-relative p-0">
-
             <!--  navbar start  -->
             {% include "partials/_navbar.html" %}
             <!--  navbar end  -->
 
             <div class="container-xxl bg-primary hero-header">
-                <div class="container px-lg-5">
-                    <div class="row g-5 align-items-end">
-                        <div class="col-lg-6 text-center text-lg-start">
-                            <h1 class="text-white mb-4 animated slideInDown">A Digital Agency Of Inteligents & Creative People</h1>
-                            <p class="text-white pb-3 animated slideInDown">Tempor rebum no at dolore lorem clita rebum rebum ipsum rebum stet dolor sed justo kasd. Ut dolor sed magna dolor sea diam. Sit diam sit justo amet ipsum vero ipsum clita lorem</p>
-                            <a href="" class="btn btn-secondary py-sm-3 px-sm-5 rounded-pill me-3 animated slideInLeft">Read More</a>
-                            <a href="" class="btn btn-light py-sm-3 px-sm-5 rounded-pill animated slideInRight">Contact Us</a>
+                    <!-- slide start -->
+                    
+                    <div class="w3-content w3-display-container">
+                        
+                        <!-- for start -->
+                        {% for head in header %}
+                        <div class="container px-lg-5 mySlides">
+                            <div class="row g-5 align-items-end">
+                                <div class="col-lg-6 text-center text-lg-start">
+                                    <h1 class="text-white mb-4 animated slideInDown">{{ head.title }}</h1>
+                                    <p class="text-white pb-3 animated slideInDown">{{ head.description }}</p>
+                                    <a href="" class="btn btn-secondary py-sm-3 px-sm-5 rounded-pill me-3 animated slideInLeft">Read More</a>
+                                    <a href="" class="btn btn-light py-sm-3 px-sm-5 rounded-pill animated slideInRight">Contact Us</a>
+                                </div>
+                                <div class="col-lg-6 text-center text-lg-start">
+                                    <img class="img-fluid animated zoomIn" src="{% static head.image %}" alt="">
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-lg-6 text-center text-lg-start">
-                            <img class="img-fluid animated zoomIn" src="{% static 'img/hero.png' %}" alt="">
-                        </div>
+                        {% endfor %}
+                        <!-- for end -->
+                    
+
+                        <button class="w3-button w3-orange w3-circle w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
+                        <button class="w3-button w3-orange w3-circle w3-display-right" onclick="plusDivs(1)">&#10095;</button>
                     </div>
-                </div>
+                    <!-- slide end -->
+            
             </div>
         </div>
         <!-- Navbar & Hero End -->
@@ -471,6 +489,27 @@
     </div>
     <!--  footer JS  -->
     {% include "partials/_footerJs.html" %}
+    <!-- header -->
+    <script>
+        var slideIndex = 1;
+        showDivs(slideIndex);
+        
+        function plusDivs(n) {
+          showDivs(slideIndex += n);
+        }
+        
+        function showDivs(n) {
+          var i;
+          var x = document.getElementsByClassName("mySlides");
+          if (n > x.length) {slideIndex = 1}
+          if (n < 1) {slideIndex = x.length}
+          for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";  
+          }
+          x[slideIndex-1].style.display = "block";  
+        }
+    </script>
+    <!-- header -->
 </body>
 
 </html>
